@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trivia API</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 40px;
+      max-width: 900px;
+    }
+    h1 { margin-bottom: 0; }
+    p { color: #555; }
+    ol { margin-top: 20px; line-height: 1.6; }
+    .error { color: #b00020; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Trivia API</h1>
+  <p>Lord of the Rings trivia questions</p>
+
+  <div id="status">Loading questions…</div>
+  <ol id="questions"></ol>
+
+  <script>
+    async function loadTrivia() {
+      const status = document.getElementById("status");
+      const list = document.getElementById("questions");
+
+      try {
+        const res = await fetch("./lotr");
+        if (!res.ok) throw new Error("Failed to load trivia file");
+
+        const data = await res.json();
+        status.textContent = "";
+
+        data.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item.question;
+          list.appendChild(li);
+        });
+      } catch (err) {
+        status.textContent = "Error loading trivia:\n" + err.message;
+        statu
