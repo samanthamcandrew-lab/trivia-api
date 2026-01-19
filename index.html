@@ -40,6 +40,13 @@
           li.textContent = item.question;
           list.appendChild(li);
         });
-      } catch (err) {
+            } catch (err) {
         status.textContent = "Error loading trivia:\n" + err.message;
-        statu
+        status.className = "error";
+      }
+    }
+
+    loadTrivia();
+  </script>
+</body>
+</html>
