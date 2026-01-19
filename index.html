@@ -29,7 +29,7 @@
       const list = document.getElementById("questions");
 
       try {
-        const res = await fetch("./lotr.json");
+        const res = await fetch("./lotr.json", { cache: "no-store" });
         if (!res.ok) throw new Error("Failed to load trivia file");
 
         const data = await res.json();
